@@ -9,11 +9,14 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/user")
 public class ViewController {
 
-    @RequestMapping("/login")
-    public String updateTrainee() {
-        return "userLogin";
+    @RequestMapping("user/login")
+    public String userLogin() {
+        return "user/login";
+    }
+    @RequestMapping("user/register")
+    public String userRegister() {
+        return "user/register";
     }
 }

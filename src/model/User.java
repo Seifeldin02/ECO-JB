@@ -9,40 +9,40 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column( unique = true)
     private String email;
 
-    @Column(nullable = false)
+    @Column
     private String password; // This should be encrypted
 
-    @Column(nullable = false)
+    @Column
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String icNo;
 
-    @Column(nullable = false)
+    @Column
     private String address;
 
-    @Column(nullable = false)
+    @Column
     private String hpNo;
 
-    @Column(nullable = false)
+    @Column
     private String dob;
 
-    @Column(nullable = false)
+    @Column
     private String status;
 
-    @Column(nullable = false)
+    @Column
     private String homeType; // A1 for high rise, A2 for landed
 
-    @Column(nullable = false)
+    @Column
     private Double electricityBill;
 
-    @Column(nullable = false)
+    @Column
     private Double waterBill;
 
-    @Column(nullable = false)
+    @Column
     private Double recycleWaste;
 
     // getters and setters

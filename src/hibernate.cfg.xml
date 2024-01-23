@@ -15,5 +15,8 @@ name="hibernate.connection.url">jdbc:mysql://localhost:3306/eco-jb</property>
 <property name="hibernate.current_session_context_class">thread</property>
 <property name="hibernate.show_sql">true</property>
 <property name="hibernate.format_sql">true</property>
+        <mapping class="model.User"/>
+        <mapping class="model.Staff"/>
+        <mapping class="model.Institution"/>
 </session-factory>
 </hibernate-configuration>
