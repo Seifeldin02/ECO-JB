@@ -15,8 +15,8 @@
             <div class="signin-header">Sign Up</div>
             <form action="<c:url value='/user/register'/>" method="post">
                 <div class="form-group">
-                    <label for="fullname" class="input-label">Full Name:</label>
-                    <input type="text" class="form-control input-field" id="fullname" placeholder="Enter full name" name="fullname" required>
+                    <label for="name" class="input-label">Full Name:</label>
+                    <input type="text" class="form-control input-field" id="name" placeholder="Enter full name" name="name" required>
                 </div>
                 <div class="form-group">
                     <label for="hpNo" class="input-label">HP No:</label>

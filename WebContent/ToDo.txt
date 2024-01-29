@@ -1,0 +1,13 @@
+For Calender, make it so Users can view User calender, which Staff can put events in the Calender for Users, 
+For Institution give them their own calender, where they can create Institution specific events which can be viewed by the user as well, user can navigate between IPKR calender (Made by staff) or Institution Calender
+Pop up screen when session expires and let them know they need to re log in
+
+Only verified users can view calender and submit information
+For verification they will send a form that only staff can see, and when staff sees the form, they will verify or decline the request based on whether it was accepted or not, they also
+should get an email accordingly whether they were succesfully verified or not
+When staff recieves the form for bills for the statistics it should be separated into statistics by users and statistics by institutions
+
+Figure out the email styling to do like a proper email messaging
+
+IMPORTANT: Make it so the user is unable to go to Eco-jb, login, register, setNew, or any of those other URLs unless he doesnt have any user session, meaning he needs to logout before being able to access these sessions
+Consider making a remember me option that makes a session a persistent session (persistent cookie if im using cookies but im not)

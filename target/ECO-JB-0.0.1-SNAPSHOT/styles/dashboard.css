@@ -1,0 +1,164 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: "OrelegaOne-Regular", sans-serif;
+    background: #D2B48C; /* light brown */
+}
+
+.dashboard-container {
+    display: flex;
+    height: 100%;
+}
+
+#sidebar {
+    width: 200px;
+    background-color: #6b9080;
+    color: #f6fff8;
+    padding: 20px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative; /* added to position logout button */
+}
+
+#sidebar .logo {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+#sidebar .menu {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: auto;
+}
+
+#sidebar .menu li {
+    padding: 10px;
+    background-color: #f6fff8;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+
+#sidebar .menu li a {
+    color: #6b9080;
+    text-decoration: none;
+    display: block;
+    padding-left: 30px; /* move text to the right */
+}
+
+#sidebar .menu li:hover a {
+    color: #D2B48C;
+}
+
+#sidebar .menu .dashboard {
+    font-weight: bold;
+    position: relative;
+    padding-right: 30px; /* provide space for the arrow */
+}
+
+#sidebar .menu .dashboard::before {
+    content: "\2630"; /* HTML entity for 'Trigram for Heaven' icon, looks like a hamburger menu */
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b9080;
+}
+
+#sidebar .menu .dashboard::after {
+    content: "\25BC"; /* HTML entity for down arrow */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b9080;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+#sidebar .menu .dashboard:hover::after {
+    color: #D2B48C; /* change color on hover */
+}
+
+#sidebar .menu .dashboard.active::after {
+    content: "\25B2"; /* HTML entity for up arrow */
+}
+
+#sidebar .menu .profile a::before {
+    content: "\263A";  /* HTML entity for 'Bust in Silhouette' icon */
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b9080;
+}
+
+#sidebar .menu .calendar a::before {
+    content: "\2691"; /* HTML entity for 'Flag' icon */
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b9080;
+}
+
+#sidebar .menu li.logout {
+    padding: 10px;
+    background-color: transparent; /* remove background */
+    margin-bottom: 0; /* remove bottom margin */
+    position: absolute; /* position it absolutely */
+    bottom: 0; /* stick it to the bottom */
+    width: calc(100% - 20px); /* full width minus padding */
+}
+
+#sidebar .menu .logout a::before {
+    content: "\2716"; /* HTML entity for 'Heavy Multiplication X' icon */
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #f6fff8; /* change color to white */
+}
+
+#sidebar .menu .logout a {
+    color: #f6fff8; /* change color to white */
+}
+
+#sidebar .menu .logout a:hover {
+    color: #D2B48C; /* change color to brown on hover */
+}
+
+#sidebar .menu .dashboard .submenu {
+    display: none;
+    list-style-type: none;
+    padding-left: 20px;
+    background-color: #e9f2f1; /* slightly lighter color */
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+#sidebar .menu .dashboard.active .submenu {
+    display: block;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f6fff8;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.header {
+    background-color: #6b9080;
+    color: #f6fff8;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 38px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}

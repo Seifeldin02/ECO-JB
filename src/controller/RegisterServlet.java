@@ -52,7 +52,8 @@ public class RegisterServlet extends HttpServlet {
         UserController userController = new UserController();
         try {
             userController.registerUser(email, password, confirmPassword, name, icNo, address, hpNo, dob, status, homeType, electricityBill, waterBill, recycleWaste);
-            response.sendRedirect("/user/login"); // Redirect to the login servlet
+            response.sendRedirect(request.getContextPath() + "/user/login");
+            request.getSession().setAttribute("message", "Register successful, please login with the registered details");
         } catch (Exception e) {
             request.setAttribute("error", e.getMessage());
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/user/register.jsp");

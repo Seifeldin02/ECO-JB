@@ -1,0 +1,241 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: "OrelegaOne-Regular", sans-serif;
+    background: #D2B48C;
+}
+
+.dashboard-container {
+    display: flex;
+    height: 100%;
+}
+#toggle-sidebar {
+    position: absolute;
+    bottom: 0px;
+    right: 0px; /* Adjust this value to make the button stick out */
+    z-index: 9999;
+    background-color: #6b9080;
+    color: #f6fff8;
+    border: 0;
+    padding: 10px;
+    border-radius: 0px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 20px; /* Increase the font size */
+    transform: translateX(100%); /* Move the button to the right */
+}
+
+#toggle-sidebar:before {
+    content: "<"; /* Unicode for less-than symbol */
+}
+
+#sidebar.retracted #toggle-sidebar:before {
+    content: ">"; /* Unicode for greater-than symbol */
+}
+#sidebar {
+    width: 400px;
+    background-color: #6b9080;
+    color: #f6fff8;
+    padding: 20px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    box-sizing: border-box;
+    transition: width 0.3s ease;
+}
+
+#sidebar.retracted {
+    width: 60px;
+    padding: 20px 0;
+}
+
+#sidebar.retracted #toggle-sidebar:before {
+    content: ">";
+}
+
+#sidebar.retracted .nav-link, #sidebar.retracted .logo {
+    text-indent: -9999px;
+}
+
+#sidebar.retracted .menu li::before {
+    left: 20px;
+}
+
+/* Rest of your CSS remains the same */
+
+#sidebar.retracted .logo {
+    display: none;
+}
+#sidebar.retracted .menu .dashboard {
+    display: none; /* Hide the dashboard button when the sidebar is retracted */
+}
+#sidebar.retracted .menu .profile{
+    display: none; /* Hide the dashboard button when the sidebar is retracted */
+}
+#sidebar.retracted .menu .calendar{
+    display: none; /* Hide the dashboard button when the sidebar is retracted */
+}
+
+/* Rest of your CSS remains the same */
+
+#sidebar .logo {
+    width: 200px; 
+    height: auto; 
+    object-fit: cover;
+    margin: 0 auto 20px; 
+    display: block; 
+    transform: translateY(-3spx);
+}
+
+#sidebar .menu {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: auto;
+    margin-top: -30px;
+}
+
+#sidebar .menu li {
+    padding: 10px;
+    background-color: #f6fff8;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    position: relative;
+}
+
+#sidebar .menu li a {
+    color: #6b9080;
+    text-decoration: none;
+    display: block;
+    padding-left: 30px; /* move text to the right */
+}
+
+#sidebar .menu li:hover a {
+    color: #D2B48C;
+}
+
+#sidebar .menu .dashboard {
+    font-weight: bold;
+    position: relative;
+    padding-right: 30px; /* provide space for the arrow */
+}
+
+#sidebar .menu .dashboard::before {
+    content: "\2630"; /* HTML entity for 'Trigram for Heaven' icon, looks like a hamburger menu */
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-60%);
+    color: #6b9080;
+}
+
+#sidebar .menu .dashboard::after {
+    content: "\25BC"; /* HTML entity for down arrow */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b9080;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+#sidebar .menu .dashboard .dashboard-header {
+    position: absolute; /* Position the dashboard header absolutely */
+    width: 100%; /* Make it span the full width of the li */
+    padding: 10px; /* Add padding to match other list items */
+    background-color: #f6fff8; /* Add background color to match other list items */
+    border-radius: 5px; /* Add border radius to match other list items */
+}
+#sidebar .menu .dashboard .submenu {
+    position: absolute; /* Position the submenu absolutely */
+    width: 94%; /* Make it span the full width of the li */
+    top: 100%; /* Position it right below the li */
+    left: 0; /* Align it to the left of the li */
+    padding-top: 50%;/* Other styles remain the same */
+}
+#sidebar .menu .dashboard:hover::after {
+    color: #D2B48C; /* change color on hover */
+}
+
+#sidebar .menu .dashboard.active::after {
+    content: "\25B2"; /* HTML entity for up arrow */
+    
+}
+
+#sidebar .menu .profile a::before {
+    content: "\1F464";  
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b9080;
+}
+
+#sidebar .menu .calendar a::before {
+    content: "\1D11C"; 
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6b9080;
+}
+
+#sidebar .menu li.logout {
+    padding: 10px;
+    background-color: transparent; /* remove background */
+    margin-bottom: 0; /* remove bottom margin */
+    position: absolute; /* position it absolutely */
+    bottom: 0; /* stick it to the bottom */
+    width: calc(100% - 20px); /* full width minus padding */
+}
+
+#sidebar .menu .logout a::before {
+    content: "\2716"; /* HTML entity for 'Heavy Multiplication X' icon */
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #f6fff8; /* change color to white */
+}
+
+#sidebar .menu .logout a {
+    color: #f6fff8; /* change color to white */
+}
+
+#sidebar .menu .logout a:hover {
+    color: #D2B48C; /* change color to brown on hover */
+}
+
+#sidebar .menu .dashboard .submenu {
+    display: none;
+    list-style-type: none;
+    padding: 10px; /* reduced padding */
+    background-color: #e9f2f1; /* slightly lighter color */
+    margin: 10px 0;
+    border-radius: 5px;
+    font-size: 14px; /* reduced font size */
+    line-height: 1.5; /* adjusted line height */
+}
+
+#sidebar .menu .dashboard.active .submenu {
+    display: block;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f6fff8;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.header {
+    background-color: #6b9080;
+    color: #f6fff8;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 38px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}

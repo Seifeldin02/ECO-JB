@@ -4,21 +4,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style><%@include file="/styles/index.css"%></style>
+    <style><%@include file="/styles/index.css"%></style>
+</head>
 <body>
     <div class="container">
         <img class="logo" src='<c:url value="/images/index.png"></c:url>' />    
         <div class="title">IPRK</div>
         <div class="subtitle">ISKANDAR PUTERI RENDAH KARBON</div>
         <div class="header">Choose sign in option</div>
-        <a href="<c:url value='/user/login'/>">
-            <div class="button">I’m a user</div>
+        <a class="button" href="<c:url value='/user/login'/>">
+            <span>I’m a user</span>
         </a>
-        <a href="<c:url value='/staff/login'/>">
-            <div class="button">I’m a staff</div>
+        <a class="button" href="<c:url value='/staff/login'/>">
+            <span>I’m a staff</span>
         </a>
-        <a href="<c:url value='/institution/login'/>">
-            <div class="button">I’m an institution</div>
+        <a class="button" href="<c:url value='/institution/login'/>">
+            <span>I’m an institution</span>
         </a>
     </div>
 </body>

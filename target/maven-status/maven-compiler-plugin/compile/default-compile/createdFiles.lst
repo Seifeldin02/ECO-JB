@@ -1,7 +1,10 @@
 model\Institution.class
 config\WebConfig.class
 bdUtil\DbConnect.class
+repository\UserRepository.class
 controller\UserController.class
+config\SecurityConfig.class
+service\UserDetailsServiceImpl.class
 model\Staff.class
 controller\RegisterServlet.class
 model\User.class
