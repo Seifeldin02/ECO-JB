@@ -18,5 +18,6 @@ name="hibernate.connection.url">jdbc:mysql://localhost:3306/eco-jb</property>
         <mapping class="model.User"/>
         <mapping class="model.Staff"/>
         <mapping class="model.Institution"/>
+        <mapping class="model.Application"/>
 </session-factory>
 </hibernate-configuration>

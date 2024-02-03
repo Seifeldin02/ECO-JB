@@ -35,15 +35,17 @@ public class MailService {
             message.setSubject("Password Reset Request");
 
             String htmlMessage = "<html>"
-                    + "<body style='color: green;'>"
-                    + "<h2 style='font-family: Arial, sans-serif;'>ECO-JB Password Reset Request</h2>"
-                    + "<p style='font-family: Arial, sans-serif;'>"
+                    + "<body style='font-family: Arial, sans-serif; color: #333;'>"
+                    + "<div style='max-width: 600px; margin: 0 auto;'>"
+                    + "<h2 style='color: #4CAF50;'>ECO-JB Password Reset Request</h2>"
+                    + "<p>"
                     + "You have requested to reset your password. If you did not make this request, you can safely ignore this email."
                     + "</p>"
-                    + "<p style='font-family: Arial, sans-serif;'>"
-                    + "To reset your password, click the link below:"
+                    + "<p>"
+                    + "To reset your password, click the button below:"
                     + "</p>"
-                    + "<a href='" + resetLink + "' style='font-family: Arial, sans-serif; color: blue;'>Reset Password</a>"
+                    + "<a href='" + resetLink + "' style='display: inline-block; font-weight: 400; color: #212529; text-align: center; vertical-align: middle; cursor: pointer; background-color: #4CAF50; border: 1px solid transparent; padding: .375rem .75rem; font-size: 1rem; line-height: 1.5; border-radius: .25rem; text-decoration: none;'>Reset Password</a>"
+                    + "</div>"
                     + "</body>"
                     + "</html>";
 

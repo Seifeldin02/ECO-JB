@@ -1,0 +1,53 @@
+/* buttons.css */
+
+input[type="submit"].submit, button.submit, input[type="button"].submit {
+    background-color: #4CAF50; /* Change to match your theme */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+input[type="submit"].deleteButton, button.deleteButton, input[type="button"].deleteButton {
+    background-color: #ff0000; /* Change to match your theme */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+input[type="submit"].submit:hover, button.submit:hover, input[type="button"].submit:hover {
+    background-color: #45a049; /* Change to match your theme */
+}
+
+input[type="submit"].deleteButton:hover, button.deleteButton:hover, input[type="button"].deleteButton:hover {
+    background-color: #804040; /* Change to match your theme */
+}
+
+select {
+    width: 10%;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* Change to match your theme */
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+select:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

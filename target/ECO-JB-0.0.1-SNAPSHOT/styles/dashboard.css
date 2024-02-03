@@ -3,16 +3,41 @@ body, html {
     padding: 0;
     height: 100%;
     font-family: "OrelegaOne-Regular", sans-serif;
-    background: #D2B48C; /* light brown */
+    background: #D2B48C;
 }
 
 .dashboard-container {
     display: flex;
     height: 100%;
 }
+#toggle-sidebar {
+    position: absolute;
+    bottom: 0px;
+    right: 0px; /* Adjust this value to make the button stick out */
+    z-index: 9999;
+    background-color: #6b9080;
+    color: #f6fff8;
+    border: 0;
+    padding: 10px;
+    border-radius: 0px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 20px; /* Increase the font size */
+    transform: translateX(100%); /* Move the button to the right */
+}
+.uploaded-image {
+    width: 33.33%;
+    height: auto;
+}
+#toggle-sidebar:before {
+    content: "<"; /* Unicode for less-than symbol */
+}
 
+#sidebar.retracted #toggle-sidebar:before {
+    content: ">"; /* Unicode for greater-than symbol */
+}
 #sidebar {
-    width: 200px;
+    width: 400px;
     background-color: #6b9080;
     color: #f6fff8;
     padding: 20px;
@@ -20,20 +45,59 @@ body, html {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    position: relative; /* added to position logout button */
+    position: relative;
+    box-sizing: border-box;
+    transition: width 0.3s ease;
 }
 
+#sidebar.retracted {
+    width: 60px;
+    padding: 20px 0;
+}
+
+#sidebar.retracted #toggle-sidebar:before {
+    content: ">";
+}
+
+#sidebar.retracted .nav-link, #sidebar.retracted .logo {
+    text-indent: -9999px;
+}
+
+#sidebar.retracted .menu li::before {
+    left: 20px;
+}
+
+/* Rest of your CSS remains the same */
+
+#sidebar.retracted .logo {
+    display: none;
+}
+#sidebar.retracted .menu .dashboard {
+    display: none; /* Hide the dashboard button when the sidebar is retracted */
+}
+#sidebar.retracted .menu .profile{
+    display: none; /* Hide the dashboard button when the sidebar is retracted */
+}
+#sidebar.retracted .menu .calendar{
+    display: none; /* Hide the dashboard button when the sidebar is retracted */
+}
+
+/* Rest of your CSS remains the same */
+
 #sidebar .logo {
-    width: 100px;
-    height: 100px;
+    width: 200px; 
+    height: auto; 
     object-fit: cover;
-    margin-bottom: 20px;
+    margin: 0 auto 20px; 
+    display: block; 
+    transform: translateY(-3spx);
 }
 
 #sidebar .menu {
     list-style-type: none;
     padding: 0;
     margin-bottom: auto;
+    margin-top: -30px;
 }
 
 #sidebar .menu li {
@@ -66,8 +130,9 @@ body, html {
     position: absolute;
     left: 10px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-60%);
     color: #6b9080;
+    cursor: pointer;
 }
 
 #sidebar .menu .dashboard::after {
@@ -80,17 +145,31 @@ body, html {
     cursor: pointer;
     transition: color 0.3s ease;
 }
-
+#sidebar .menu .dashboard .dashboard-header {
+    position: absolute; /* Position the dashboard header absolutely */
+    width: 100%; /* Make it span the full width of the li */
+    padding: 10px; /* Add padding to match other list items */
+    background-color: #f6fff8; /* Add background color to match other list items */
+    border-radius: 5px; /* Add border radius to match other list items */
+}
+#sidebar .menu .dashboard .submenu {
+    position: absolute; /* Position the submenu absolutely */
+    width: 94%; /* Make it span the full width of the li */
+    top: 100%; /* Position it right below the li */
+    left: 0; /* Align it to the left of the li */
+    padding-top: 50%;/* Other styles remain the same */
+}
 #sidebar .menu .dashboard:hover::after {
     color: #D2B48C; /* change color on hover */
 }
 
 #sidebar .menu .dashboard.active::after {
     content: "\25B2"; /* HTML entity for up arrow */
+    
 }
 
 #sidebar .menu .profile a::before {
-    content: "\263A";  /* HTML entity for 'Bust in Silhouette' icon */
+    content: "\1F464";  
     position: absolute;
     left: 10px;
     top: 50%;
@@ -99,7 +178,7 @@ body, html {
 }
 
 #sidebar .menu .calendar a::before {
-    content: "\2691"; /* HTML entity for 'Flag' icon */
+    content: "\1D11C"; 
     position: absolute;
     left: 10px;
     top: 50%;
@@ -136,10 +215,12 @@ body, html {
 #sidebar .menu .dashboard .submenu {
     display: none;
     list-style-type: none;
-    padding-left: 20px;
+    padding: 10px; /* reduced padding */
     background-color: #e9f2f1; /* slightly lighter color */
     margin: 10px 0;
     border-radius: 5px;
+    font-size: 14px; /* reduced font size */
+    line-height: 1.5; /* adjusted line height */
 }
 
 #sidebar .menu .dashboard.active .submenu {
@@ -161,4 +242,203 @@ body, html {
     font-size: 38px;
     font-weight: 400;
     margin-bottom: 20px;
+}
+
+.user-details {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.user-details h2 {
+    color: #008000;
+}
+
+.user-details p {
+    margin-bottom: 10px;
+}
+
+    .warning {
+        color: red;
+        font-weight: bold;
+    }
+    .editable input {
+        border: 1px solid #ccc;
+        padding: 5px;
+        margin: 5px 0;
+    }
+    .join-us {
+        color: blue;
+        text-decoration: underline;
+    }
+    
+        #editButton, #saveChangesButton {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    
+
+#passwordModal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+#passwordModal label, #passwordModal input, #passwordModal button {
+    display: block;
+    margin-bottom: 10px;
+}
+.success {
+        color: #4CAF50; 
+        background-color: #DFF2BF; 
+        border-left: 6px solid #4CAF50; 
+    }
+.error {
+        color: #f44336; 
+        background-color: #FFD2D2; 
+        border-left: 6px solid #f44336; 
+    }
+.message {
+        margin: 10px 0;
+        padding: 12px;
+        text-align: center;
+        font-size: 1em;
+        color: #4CAF50; 
+        background-color: #DFF2BF; 
+        border-left: 6px solid #4CAF50; 
+    }
+    
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #f0fff0; /* Very light green */
+  margin: 5% auto; /* 5% from the top and centered */
+  padding: 20px;
+  border: 1px solid #000; /* Black border */
+  width: 30%; /* Adjust as needed */
+  height: 30%; /* Adjust as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* The Submit Button */
+.submit-btn {
+  background-color: #7bcc33; /* White */
+  border: none;
+  color: #000; /* Black */
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 70px 2px;
+  cursor: pointer;
+}
+
+/* The Cancel Button */
+.cancel-btn {
+  background-color: #f0fff0; /* Same color as the modal */
+  border: 1px solid #aaa; /* Gray border */
+  color: #000; /* Black */
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 70px 2px;
+  cursor: pointer;
+}
+
+/* The Password Input */
+#password {
+  border: 1px solid #aaa; /* Gray border */
+  background-color: #e0ffea; /* Slightly darker than the modal */
+  padding: 10px;
+  margin: 10px 0;
+  width: 97%;
+}
+
+/* The Header */
+.modal-content h2 {
+  color: #400040; /* White */
+  font-weight: bold;
+}
+select {
+    width: 10%;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* Change to match your theme */
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+select:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+/* The Button Container */
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }

@@ -12,9 +12,9 @@
         <li class="dashboard">
             <a class="nav-link" href='<c:url value="/user/dashboard"/>'>Dashboard</a>
             <ul class="submenu">
-                <li><a href='<c:url value="/user/carbon-analysis"/>'>Carbon Analysis</a></li>
-                <li><a href='<c:url value="/user/my-details"/>'>My Details</a></li>
-                <li><a href='<c:url value="/user/join-us"/>'>Join us!</a></li>
+                <li><a href='<c:url value="/user/carbon"/>'>Carbon Analysis</a></li>
+                <li><a href='<c:url value="/user/details"/>'>My Details</a></li>
+                <li><a href='<c:url value="/user/join"/>'>Join us!</a></li>
             </ul>
         </li>
         <li class="logout"><a class="nav-link" href='<c:url value="/user/logout"/>'>Sign Out</a></li>

@@ -25,7 +25,10 @@ body, html {
     font-size: 20px; /* Increase the font size */
     transform: translateX(100%); /* Move the button to the right */
 }
-
+.uploaded-image {
+    width: 33.33%;
+    height: auto;
+}
 #toggle-sidebar:before {
     content: "<"; /* Unicode for less-than symbol */
 }
@@ -129,6 +132,7 @@ body, html {
     top: 50%;
     transform: translateY(-60%);
     color: #6b9080;
+    cursor: pointer;
 }
 
 #sidebar .menu .dashboard::after {
@@ -238,4 +242,203 @@ body, html {
     font-size: 38px;
     font-weight: 400;
     margin-bottom: 20px;
+}
+
+.user-details {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.user-details h2 {
+    color: #008000;
+}
+
+.user-details p {
+    margin-bottom: 10px;
+}
+
+    .warning {
+        color: red;
+        font-weight: bold;
+    }
+    .editable input {
+        border: 1px solid #ccc;
+        padding: 5px;
+        margin: 5px 0;
+    }
+    .join-us {
+        color: blue;
+        text-decoration: underline;
+    }
+    
+        #editButton, #saveChangesButton {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    
+
+#passwordModal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+#passwordModal label, #passwordModal input, #passwordModal button {
+    display: block;
+    margin-bottom: 10px;
+}
+.success {
+        color: #4CAF50; 
+        background-color: #DFF2BF; 
+        border-left: 6px solid #4CAF50; 
+    }
+.error {
+        color: #f44336; 
+        background-color: #FFD2D2; 
+        border-left: 6px solid #f44336; 
+    }
+.message {
+        margin: 10px 0;
+        padding: 12px;
+        text-align: center;
+        font-size: 1em;
+        color: #4CAF50; 
+        background-color: #DFF2BF; 
+        border-left: 6px solid #4CAF50; 
+    }
+    
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #f0fff0; /* Very light green */
+  margin: 5% auto; /* 5% from the top and centered */
+  padding: 20px;
+  border: 1px solid #000; /* Black border */
+  width: 30%; /* Adjust as needed */
+  height: 30%; /* Adjust as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* The Submit Button */
+.submit-btn {
+  background-color: #7bcc33; /* White */
+  border: none;
+  color: #000; /* Black */
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 70px 2px;
+  cursor: pointer;
+}
+
+/* The Cancel Button */
+.cancel-btn {
+  background-color: #f0fff0; /* Same color as the modal */
+  border: 1px solid #aaa; /* Gray border */
+  color: #000; /* Black */
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 70px 2px;
+  cursor: pointer;
+}
+
+/* The Password Input */
+#password {
+  border: 1px solid #aaa; /* Gray border */
+  background-color: #e0ffea; /* Slightly darker than the modal */
+  padding: 10px;
+  margin: 10px 0;
+  width: 97%;
+}
+
+/* The Header */
+.modal-content h2 {
+  color: #400040; /* White */
+  font-weight: bold;
+}
+select {
+    width: 10%;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* Change to match your theme */
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+select:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+/* The Button Container */
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }

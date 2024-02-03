@@ -21,20 +21,31 @@
     <small> <% session.removeAttribute("message"); %></small>
 </c:if>
             <form action="<c:url value='/user/authenticate'/>" method="post">
-                <div class="form-group">
-                    <label for="email" class="input-label">Email:</label>
-                    <input type="email" class="form-control input-field" id="email" placeholder="Enter email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="input-label">Password:</label>
-                    <input type="password" class="form-control input-field" id="password" placeholder="Enter password" name="password" required>
-                </div>
-<div class="error-message" style="color:red;">
-    <c:if test="${not empty error}">
-        <c:out value="${error}"/>
-    </c:if>
-</div>                <button type="submit" class="button submit-button">Let me in</button>
-            </form>
+    <div class="form-group">
+        <label for="email" class="input-label">Email:</label>
+        <input type="email" class="form-control input-field" id="email" placeholder="Enter email" name="email" required>
+    </div>
+    <div class="form-group">
+        <label for="password" class="input-label">Password:</label>
+        <input type="password" class="form-control input-field" id="password" placeholder="Enter password" name="password" required>
+    </div>
+    <div class="form-group">
+        <input type="checkbox" id="rememberMe" name="rememberMe">
+        <label for="rememberMe">Remember me</label>
+    </div>
+    <div class="error-message" style="color:red;">
+        <c:if test="${not empty error}">
+            <c:out value="${error}"/>
+        </c:if>
+    </div>
+    
+       <div class="message">
+        <c:if test="${not empty message}">
+            <c:out value="${message}"/>
+        </c:if>
+    </div>
+    <button type="submit" class="button submit-button">Let me in</button>
+</form>
             <div class="link-container">
                 <a href="<c:url value='/user/forgotPassword'/>" class="small-link">
                     Forget password?
