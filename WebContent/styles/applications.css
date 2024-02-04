@@ -1,0 +1,29 @@
+#tables {
+    overflow: hidden;
+    width: 200%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.table-responsive {
+    width: 50%;
+    float: left;
+}
+
+#carbonTable {
+    display: none;
+}
+
+#applicationsTable th, #applicationsTable td {
+    padding: 15px;
+    text-align: left;
+}
+
+#applicationsTable {
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+#applicationsTable th {
+    background-color: #f8f9fa;
+    color: #343a40;
+}

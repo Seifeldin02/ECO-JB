@@ -13,12 +13,14 @@ import service.UserDetailsServiceImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import service.StaffDetailsServiceImpl;
+import service.MyUserDetailsService;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsServiceImpl userDetailsService;
+    private MyUserDetailsService userDetailsService;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -29,19 +31,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/user/login", "/user/register").permitAll()
-                .antMatchers("/user/dashboard").authenticated() 
+                .antMatchers("/user/login", "/user/register", "/staff/login", "/staff/register").permitAll()
+                .antMatchers("/user/**").hasAuthority("ROLE_USER")
+                .antMatchers("/staff/**").hasAuthority("ROLE_STAFF")
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
-                .loginPage("/user/login")
-                .loginProcessingUrl("/user/authenticate")
-                .defaultSuccessUrl("/user/dashboard", true)
-                .failureUrl("/user/login?error=true")
+                .loginPage("/login")
+                .loginProcessingUrl("/authenticate")
+                .defaultSuccessUrl("/dashboard", true)
+                .failureUrl("/login?error=true")
                 .permitAll()
                 .and()
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout")) 
+            .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) 
                 .logoutSuccessUrl("/") 
                 .invalidateHttpSession(true) 
                 .clearAuthentication(true) 

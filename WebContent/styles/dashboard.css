@@ -3,7 +3,7 @@ body, html {
     padding: 0;
     height: 100%;
     font-family: "OrelegaOne-Regular", sans-serif;
-    background: #D2B48C;
+    background: #f6fff8;
 }
 
 .dashboard-container {
@@ -25,6 +25,25 @@ body, html {
     font-size: 20px; /* Increase the font size */
     transform: translateX(100%); /* Move the button to the right */
 }
+
+
+.charts-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.chart-box {
+    width: 45%;
+    height: 400px;
+    box-sizing: border-box;
+}
+
+.chart-box.single {
+    width: 45%;
+    margin: 20px auto 0;
+    box-sizing: border-box;
+}
 .uploaded-image {
     width: 33.33%;
     height: auto;
@@ -37,6 +56,10 @@ body, html {
     content: ">"; /* Unicode for greater-than symbol */
 }
 #sidebar {
+	position: sticky; 
+    top: 0;
+    left: 0;
+    height: 100%; /* Change this line */
     width: 400px;
     background-color: #6b9080;
     color: #f6fff8;
@@ -45,11 +68,9 @@ body, html {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    position: relative;
     box-sizing: border-box;
     transition: width 0.3s ease;
 }
-
 #sidebar.retracted {
     width: 60px;
     padding: 20px 0;
@@ -321,9 +342,6 @@ body, html {
         padding: 12px;
         text-align: center;
         font-size: 1em;
-        color: #4CAF50; 
-        background-color: #DFF2BF; 
-        border-left: 6px solid #4CAF50; 
     }
     
 /* The Modal (background) */

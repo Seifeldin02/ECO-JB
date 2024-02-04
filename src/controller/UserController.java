@@ -3,6 +3,7 @@ package controller;
 import model.User;
 import model.Application;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -33,6 +34,11 @@ import java.util.UUID;
 import service.MailService;
 import javax.servlet.http.HttpSession;
 import repository.UserRepository;
+import model.Carbon;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Date;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -183,6 +189,7 @@ public class UserController {
             return "redirect:/user/login";
         }
     }
+    
     @Autowired
     private MailService mailService;
 
@@ -235,18 +242,31 @@ public class UserController {
         request.getSession().setAttribute("message", "If this is a valid email, we'll send a password reset link to this email");
         return "redirect:/user/forgotPassword";
     }
+    
     @PostMapping("user/resetPassword")
     public String resetPassword(@RequestParam("token") String token, @RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword, HttpServletRequest request) {
         // Check if the token is valid
         if (!token.equals(request.getSession().getAttribute("resetToken"))) {
             request.getSession().setAttribute("error", "Invalid token");
-            return "redirect:/user/setNew";
+            return "redirect:/user/setNew?token=" + token;
         }
 
         // Check if the passwords match
         if (!password.equals(confirmPassword)) {
             request.getSession().setAttribute("error", "Passwords do not match");
-            return "redirect:/user/setNew";
+            return "redirect:/user/setNew?token=" + token;
+        }
+
+        // Check if password length is between 8 and 20
+        if (password.length() < 8 || password.length() > 20) {
+            request.getSession().setAttribute("error", "Password length should be between 8 and 20");
+            return "redirect:/user/setNew?token=" + token;
+        }
+
+        // Check if password contains at least one letter and one number
+        if (!password.matches(".*[A-Za-z].*") || !password.matches(".*[0-9].*")) {
+            request.getSession().setAttribute("error", "Password must contain at least 1 letter and 1 number");
+            return "redirect:/user/setNew?token=" + token;
         }
 
         // Hash the new password
@@ -278,6 +298,7 @@ public class UserController {
 
             // Commit the transaction
             transaction.commit();
+            request.getSession().removeAttribute("resetToken");
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -294,6 +315,7 @@ public class UserController {
         request.getSession().setAttribute("message", "Password reset successful");
         return "redirect:/user/login";
     }
+    
     @GetMapping("/user/logout")
     public String logout(HttpServletRequest request) {
         // Get the session and invalidate it
@@ -306,6 +328,7 @@ public class UserController {
         SecurityContextHolder.clearContext();
         return "redirect:/";
     }
+    
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -502,6 +525,7 @@ public class UserController {
             }
         }
     }
+    
     @PostMapping("/user/deleteApplication")
     public ModelAndView deleteApplication(HttpServletRequest request, RedirectAttributes redirectAttributes) {
         // Get the user from the session
@@ -576,4 +600,99 @@ public class UserController {
         // Redirect to the profile page
         return new ModelAndView("redirect:/user/join");
     }
+    
+    @PostMapping("user/submitFootprints")
+    public String submitFootprints(@ModelAttribute Carbon carbon, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        Session session = null;
+        Transaction transaction = null;
+        System.out.println(carbon);  // Add this line
+
+        try {
+            // Get a new Hibernate session
+            session = sessionFactory.openSession();
+
+            // Start a new transaction
+            transaction = session.beginTransaction();
+
+            // Get the current user from the session
+            User currentUser = (User) request.getSession().getAttribute("user");
+            if (currentUser == null) {
+                throw new Exception("Failed to get user from session");
+            }
+            String email = currentUser.getEmail();
+            if (email == null) {
+                throw new Exception("Failed to get email from user");
+            }
+
+            // Use the email to look up the user's ID
+            Query<User> userQuery = session.createQuery("from User where email = :email", User.class);
+            userQuery.setParameter("email", email);
+            currentUser = userQuery.uniqueResult();
+
+            // Use Hibernate to look for any carbon submissions with that user ID
+            Query<Carbon> carbonQuery = session.createQuery("from Carbon where user.id = :userId", Carbon.class);
+            carbonQuery.setParameter("userId", currentUser.getId());
+            Carbon existingCarbon = carbonQuery.uniqueResult();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+            try {
+                Date waterDate = dateFormat.parse(carbon.getWaterDate());
+                Date electricDate = dateFormat.parse(carbon.getElectricDate());
+                Date recycleDate = dateFormat.parse(carbon.getRecycleDate());
+
+                // Set these Date objects on your Carbon object
+                carbon.setWaterDate(carbon.getWaterDate());
+                carbon.setElectricDate(carbon.getElectricDate());
+                carbon.setRecycleDate(carbon.getRecycleDate());
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return "errorPage";
+            }
+
+            if (existingCarbon != null) {
+                // Update the existing data
+                existingCarbon.setWaterUsage(carbon.getWaterUsage());
+                existingCarbon.setWaterBill(carbon.getWaterBill());
+                existingCarbon.setWaterDate(carbon.getWaterDate());
+                existingCarbon.setWaterDays(carbon.getWaterDays());
+
+
+                existingCarbon.setElectricUsage(carbon.getElectricUsage());
+                existingCarbon.setElectricBill(carbon.getElectricBill());
+                existingCarbon.setElectricDate(carbon.getElectricDate());
+                existingCarbon.setElectricDays(carbon.getElectricDays());
+
+
+                existingCarbon.setRecycleUsage(carbon.getRecycleUsage());
+                existingCarbon.setRecycleBill(carbon.getRecycleBill());
+                existingCarbon.setRecycleDate(carbon.getRecycleDate());
+                existingCarbon.setRecycleDays(carbon.getRecycleDays());
+
+                session.update(existingCarbon);
+            } else {
+                // Create a new Carbon object and store it in the database
+                carbon.setUser(currentUser);
+                session.save(carbon);
+            }
+
+            // Commit the transaction
+            transaction.commit();
+
+            // Add a flash message
+            redirectAttributes.addFlashAttribute("message", "Submitting new information will override old ones, are you sure you want to do this?");
+        } catch (Exception e) {
+            // Handle exceptions
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
+        // Redirect to the same page
+        return "redirect:/user/join";
+    }
+    
 }

@@ -1,4 +1,5 @@
-Pending should be able to view their application and only delete it, they cant edit it, make the whole display server sided, fetch the application information from the server side
+For the graphs, make a function that converts the string in the database to date values, so it can be more accurate, where the first 4 letters are the year, then month, then day etc...
+If possible, make the user input on the graph be marked with something so the user can see where they fare with the rest of the data
 And join us should have a verification process if the user is not verified, if they are verified it should prompt them to submit their carbon information for each electricity, waterbill, and whatnot
 
 For Calender, make it so Users can view User calender, which Staff can put events in the Calender for Users, 
@@ -9,5 +10,5 @@ For verification they will send a form that only staff can see, and when staff s
 should get an email accordingly whether they were succesfully verified or not
 When staff recieves the form for bills for the statistics it should be separated into statistics by users and statistics by institutions
 Carob Analysis should have the carbon analysis charts for everyone
-My Details should have the user's specific details about the carbon analysis and the averages and whatnot
 Calendar is the calendar for events made by staff or institutions 
+DO THE FRONT END STUFF AFTER EXAM

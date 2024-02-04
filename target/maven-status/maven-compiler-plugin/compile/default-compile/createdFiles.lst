@@ -2,6 +2,7 @@ config\WebConfig.class
 controller\FileServlet.class
 controller\UserController.class
 service\UserService.class
+service\MyUserDetailsService.class
 config\SecurityConfig.class
 service\MailService$1.class
 service\UserDetailsServiceImpl.class
@@ -9,9 +10,12 @@ model\Staff.class
 controller\ViewController.class
 model\Application.class
 model\Institution.class
-bdUtil\DbConnect.class
 service\FileUploadService.class
+model\Carbon.class
+bdUtil\DbConnect.class
 service\MailService.class
 controller\StaffController.class
 repository\UserRepository.class
+service\StaffDetailsServiceImpl.class
 model\User.class
+repository\StaffRepository.class

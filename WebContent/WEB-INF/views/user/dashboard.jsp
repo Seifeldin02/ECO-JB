@@ -23,13 +23,10 @@
                 <p><strong>Address:</strong> ${sessionScope.user.address != null ? sessionScope.user.address : 'EMPTY'}</p>
                 <p><strong>DOB:</strong> ${sessionScope.user.dob != null ? sessionScope.user.dob : 'EMPTY'}</p>
                 <p><strong>Home Type:</strong> ${sessionScope.user.homeType != null ? sessionScope.user.homeType : 'EMPTY'}</p>
-                <p><strong>Electricity Bill:</strong> ${sessionScope.user.electricityBill != null ? sessionScope.user.electricityBill : 'EMPTY'}</p>
-                <p><strong>Water Bill:</strong> ${sessionScope.user.waterBill != null ? sessionScope.user.waterBill : 'EMPTY'}</p>
-                <p><strong>Recycle Waste:</strong> ${sessionScope.user.recycleWaste != null ? sessionScope.user.recycleWaste : 'EMPTY'}</p>
                 <p><strong>Status:</strong> ${sessionScope.user.status != null ? sessionScope.user.status : 'Unverified'}</p>
             </div>
 <c:if test="${not empty message}">
-    <p class="message">${message}</p>
+    <p class="message error">${message}</p>
 </c:if>  
 
 </div>

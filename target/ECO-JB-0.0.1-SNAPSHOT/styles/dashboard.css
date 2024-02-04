@@ -37,6 +37,9 @@ body, html {
     content: ">"; /* Unicode for greater-than symbol */
 }
 #sidebar {
+    top: 0;
+    left: 0;
+    height: 100%; /* Change this line */
     width: 400px;
     background-color: #6b9080;
     color: #f6fff8;
@@ -45,11 +48,9 @@ body, html {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    position: relative;
     box-sizing: border-box;
     transition: width 0.3s ease;
 }
-
 #sidebar.retracted {
     width: 60px;
     padding: 20px 0;
@@ -321,9 +322,6 @@ body, html {
         padding: 12px;
         text-align: center;
         font-size: 1em;
-        color: #4CAF50; 
-        background-color: #DFF2BF; 
-        border-left: 6px solid #4CAF50; 
     }
     
 /* The Modal (background) */

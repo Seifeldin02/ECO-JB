@@ -7,7 +7,7 @@ document.querySelector('.dashboard').addEventListener('click', function(event) {
         event.stopPropagation();
         this.classList.toggle('active');
     } else {
-    	window.location.href = '/ECO-JB/user/dashboard'; 
+//what happens when clicking the dashboard icon
     }
 });
 

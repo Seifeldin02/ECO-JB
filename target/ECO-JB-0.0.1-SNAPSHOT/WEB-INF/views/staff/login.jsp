@@ -33,16 +33,15 @@
         <input type="checkbox" id="rememberMe" name="rememberMe">
         <label for="rememberMe">Remember me</label>
     </div>
-    <div class="error-message" style="color:red;">
         <c:if test="${not empty error}">
-            <c:out value="${error}"/>
+            <div class="error-message" style="color:red;">
+            <c:out value="${error}"/>     </div>
+            
         </c:if>
-    </div>
-           <div class="message">
         <c:if test="${not empty message}">
-            <c:out value="${message}"/>
+          <div class = "message"> <c:out value="${message}"/></div> 
         </c:if>
-    </div>
+
     <button type="submit" class="button submit-button">Let me in</button>
 </form>
             <div class="link-container">
