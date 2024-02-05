@@ -18,9 +18,6 @@
         <a class="button" href="<c:url value='/staff/login'/>">
             <span>I’m a staff</span>
         </a>
-        <a class="button" href="<c:url value='/institution/login'/>">
-            <span>I’m an institution</span>
-        </a>
     </div>
 </body>
 </html>

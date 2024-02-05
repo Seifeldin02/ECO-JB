@@ -52,9 +52,7 @@
 </style>
 </head>
 <body>
-        <c:if test="${not empty message}">
-    <p class="message">${message}</p>
-</c:if>  
+
     <div class="dashboard-container">
     <div id="navigation">
 <div id="sidebar">
@@ -129,6 +127,9 @@
 
                     <input type="submit" value="Submit All Footprints">
                 </form>
+                        <c:if test="${not empty message}">
+    <p class="message error">${message}</p>
+</c:if>  
             </div>
         </div>
     </div>

@@ -7,6 +7,7 @@
     <title>Carbon Details</title>
     <style><%@include file="/styles/dashboard.css"%></style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
 </head>
 <body>
     <div class="dashboard-container">
@@ -28,10 +29,12 @@
                     <h3>Recycle Usage</h3>
                     <canvas id="recycleChart"></canvas>
                 </div>
+                
             </div>
-            <script>
-                var jsonCarbonData = '<c:out value="${jsonCarbonData}" escapeXml="false" />';
-            </script>
+<script>
+    var jsonCarbonData = '<c:out value="${jsonCarbonData}" escapeXml="false" />';
+    var jsonCurrentUserCarbonData = '<c:out value="${jsonCurrentUserCarbonData}" escapeXml="false" />';
+</script>
             <script><%@include file="/js/carbon.js"%></script>
         </div>
     </div>

@@ -220,54 +220,75 @@ public class ViewController {
     }
 
 
- @RequestMapping("user/carbon")
- public String userCarbon(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
-     HttpSession httpSession = request.getSession(false);
-     if (httpSession != null) {
-         User user = (User) httpSession.getAttribute("user");
-         if (user != null) {
-             Session session = sessionFactory.openSession();
-             User updatedUser = session.get(User.class, user.getId());
-             httpSession.setAttribute("user", updatedUser);
+    @RequestMapping("user/carbon")
+    public String userCarbon(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
+        HttpSession httpSession = request.getSession(false);
+        if (httpSession != null) {
+            User user = (User) httpSession.getAttribute("user");
+            if (user != null) {
+                Session session = sessionFactory.openSession();
+                User updatedUser = session.get(User.class, user.getId());
+                httpSession.setAttribute("user", updatedUser);
 
-             // Fetch all Carbon data from the database
-             CriteriaBuilder cb = session.getCriteriaBuilder();
-             CriteriaQuery<Carbon> cq = cb.createQuery(Carbon.class);
-             Root<Carbon> root = cq.from(Carbon.class);
-             cq.select(root);
-             List<Carbon> carbonData = session.createQuery(cq).getResultList();
+                // Fetch all Carbon data from the database
+                CriteriaBuilder cb = session.getCriteriaBuilder();
+                CriteriaQuery<Carbon> cq = cb.createQuery(Carbon.class);
+                Root<Carbon> root = cq.from(Carbon.class);
+                cq.select(root);
+                List<Carbon> carbonData = session.createQuery(cq).getResultList();
 
-             // Convert the Carbon data to a JSON string
-             ObjectMapper mapper = new ObjectMapper();
-             String jsonCarbonData = "";
-             try {
-                 jsonCarbonData = mapper.writeValueAsString(carbonData);
-             } catch (Exception e) {
-                 e.printStackTrace();
-             }
+                // Fetch Carbon data for the current user from the database
+                cq.where(cb.equal(root.get("user"), user.getId())); // Add a where clause to fetch data for the current user only
+                List<Carbon> currentUserCarbonData = session.createQuery(cq).getResultList();
 
-             // Add the JSON string to the model
-             model.addAttribute("jsonCarbonData", jsonCarbonData);
+                // Calculate averages
+                double averageElectricUsage = carbonData.stream().mapToDouble(Carbon::getElectricUsage).average().orElse(0.0);
+                double averageWaterUsage = carbonData.stream().mapToDouble(Carbon::getWaterUsage).average().orElse(0.0);
+                double averageRecycleUsage = carbonData.stream().mapToDouble(Carbon::getRecycleUsage).average().orElse(0.0);
 
-             session.close();
-         }
-     }
+                // Create a new Carbon object to hold the average data
+                Carbon averageCarbonData = new Carbon();
+                averageCarbonData.setElectricUsage(averageElectricUsage);
+                averageCarbonData.setWaterUsage(averageWaterUsage);
+                averageCarbonData.setRecycleUsage(averageRecycleUsage);
 
-     if (httpSession == null || httpSession.getAttribute("user") == null) {
-         return "redirect:/user/login";
-     }
+                // Convert the Carbon data to a JSON string
+                ObjectMapper mapper = new ObjectMapper();
+                String jsonCarbonData = "";
+                String jsonCurrentUserCarbonData = "";
+                String jsonAverageCarbonData = "";
+                try {
+                    jsonCarbonData = mapper.writeValueAsString(carbonData);
+                    jsonCurrentUserCarbonData = mapper.writeValueAsString(currentUserCarbonData);
+                    jsonAverageCarbonData = mapper.writeValueAsString(averageCarbonData);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-     User user = (User) httpSession.getAttribute("user");
-     if (user.getStatus() == null) {
-         redirectAttributes.addFlashAttribute("message", "Please submit an application and wait for verification before accessing these tabs");
-         return "redirect:/user/dashboard";
-     } else if ("Pending".equals(user.getStatus())) {
-         redirectAttributes.addFlashAttribute("message", "Please wait for a staff to verify your credentials before accessing these tabs");
-         return "redirect:/user/dashboard";
-     }
+                // Add the JSON strings to the model
+                model.addAttribute("jsonCarbonData", jsonCarbonData);
+                model.addAttribute("jsonCurrentUserCarbonData", jsonCurrentUserCarbonData);
+                model.addAttribute("jsonAverageCarbonData", jsonAverageCarbonData);
 
-     return "user/carbon";
- }
+                session.close();
+            }
+        }
+
+        if (httpSession == null || httpSession.getAttribute("user") == null) {
+            return "redirect:/user/login";
+        }
+
+        User user = (User) httpSession.getAttribute("user");
+        if (user.getStatus() == null) {
+            redirectAttributes.addFlashAttribute("message", "Please submit an application and wait for verification before accessing these tabs");
+            return "redirect:/user/dashboard";
+        } else if ("Pending".equals(user.getStatus())) {
+            redirectAttributes.addFlashAttribute("message", "Please wait for a staff to verify your credentials before accessing these tabs");
+            return "redirect:/user/dashboard";
+        }
+
+        return "user/carbon";
+    }
     
     @RequestMapping("user/details")
     public String userDetails(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {

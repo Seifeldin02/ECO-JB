@@ -36,21 +36,21 @@
     <h2>Your Carbon Emission Details</h2>
     <c:if test="${carbon != null}">
         <h3>Water Details</h3>
-        <p><strong>Usage:</strong> ${carbon.waterUsage != null ? carbon.waterUsage : 'N/A'}</p>
-        <p><strong>Bill:</strong> ${carbon.waterBill != null ? carbon.waterBill : 'N/A'}</p>
-        <p><strong>Days:</strong> ${carbon.waterDays != null ? carbon.waterDays : 'N/A'}</p>
+        <p><strong>Usage:</strong> ${carbon.waterUsage != null ? carbon.waterUsage : 'N/A'} <%= "m<sup>3</sup>" %></p>
+        <p><strong>Bill:</strong> ${carbon.waterBill != null ? carbon.waterBill : 'N/A'} MYR</p>
+        <p><strong>Days:</strong> ${carbon.waterDays != null ? carbon.waterDays : 'N/A'} Days</p>
         <p><strong>Date:</strong> ${carbon.waterDate != null ? carbon.waterDate : 'N/A'}</p>
 
         <h3>Electric Details</h3>
-        <p><strong>Usage:</strong> ${carbon.electricUsage != null ? carbon.electricUsage : 'N/A'}</p>
-        <p><strong>Bill:</strong> ${carbon.electricBill != null ? carbon.electricBill : 'N/A'}</p>
-        <p><strong>Days:</strong> ${carbon.electricDays != null ? carbon.electricDays : 'N/A'}</p>
+        <p><strong>Usage:</strong> ${carbon.electricUsage != null ? carbon.electricUsage : 'N/A'} kWh</p>
+        <p><strong>Bill:</strong> ${carbon.electricBill != null ? carbon.electricBill : 'N/A'} MYR</p>
+        <p><strong>Days:</strong> ${carbon.electricDays != null ? carbon.electricDays : 'N/A'} Days</p>
         <p><strong>Date:</strong> ${carbon.electricDate != null ? carbon.electricDate : 'N/A'}</p>
 
         <h3>Recycle Details</h3>
-        <p><strong>Usage:</strong> ${carbon.recycleUsage != null ? carbon.recycleUsage : 'N/A'}</p>
-        <p><strong>Bill:</strong> ${carbon.recycleBill != null ? carbon.recycleBill : 'N/A'}</p>
-        <p><strong>Days:</strong> ${carbon.recycleDays != null ? carbon.recycleDays : 'N/A'}</p>
+        <p><strong>Usage:</strong> ${carbon.recycleUsage != null ? carbon.recycleUsage : 'N/A'} kg</p>
+        <p><strong>Bill:</strong> ${carbon.recycleBill != null ? carbon.recycleBill : 'N/A'} MYR</p>
+        <p><strong>Days:</strong> ${carbon.recycleDays != null ? carbon.recycleDays : 'N/A'} Days</p>
         <p><strong>Date:</strong> ${carbon.recycleDate != null ? carbon.recycleDate : 'N/A'}</p>
     </c:if>
             </div>
